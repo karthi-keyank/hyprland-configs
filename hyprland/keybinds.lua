@@ -307,3 +307,24 @@ hl.bind( keybinds.kbScreenRecordRegion, hl.dsp.exec_cmd("caelestia record -r")) 
 
 -- Color picker
 hl.bind( keybinds.kbColorPicker, hl.dsp.exec_cmd("hyprpicker -a"))
+
+-- Mute/unmute microphone
+hl.bind( "XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { locked = true })
+
+-- Mute/unmute speakers
+hl.bind( "XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true })
+hl.bind( keybinds.kbMuteSpeaker, hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true })
+
+-- Increase volume (enables unmute + adjusts volume with limit of 1.0)
+hl.bind(
+    "XF86AudioRaiseVolume",
+    hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ 0; wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ " .. vars.volumeStep .. "%+"),
+    { locked = true, repeating = true }
+)
+
+-- Decrease volume
+hl.bind(
+    "XF86AudioLowerVolume",
+    hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ 0; wpctl set-volume @DEFAULT_AUDIO_SINK@ " .. vars.volumeStep .. "%-"),
+    { locked = true, repeating = true }
+)

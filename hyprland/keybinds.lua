@@ -328,3 +328,25 @@ hl.bind(
     hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ 0; wpctl set-volume @DEFAULT_AUDIO_SINK@ " .. vars.volumeStep .. "%-"),
     { locked = true, repeating = true }
 )
+
+-- Suspend to RAM with hibernation after timeout
+hl.bind( keybinds.kbSuspend, hl.dsp.exec_cmd("~/.config/hypr/scripts/suspend-toggle.sh"), { locked = true })
+
+-- Clipboard manager
+hl.bind( keybinds.kbClipboard, hl.dsp.exec_cmd("pkill fuzzel || caelestia clipboard"))
+
+-- Clipboard manager (with delay)
+hl.bind( keybinds.kbClipboardDelayed, hl.dsp.exec_cmd("pkill fuzzel || caelestia clipboard -d"))
+
+-- Emoji picker
+hl.bind( keybinds.kbEmojiPicker, hl.dsp.exec_cmd("pkill fuzzel || caelestia emoji -p"))
+
+-- Alternative paste from clipboard history
+hl.bind( keybinds.kbClipboardPasteLatest, hl.dsp.exec_cmd('sleep 0.5s && ydotool type -d 1 "$(cliphist list | head -1 | cliphist decode)"'), { locked = true })
+
+-- Test notification with multiple actions
+hl.bind( 
+    keybinds.kbTestNotification,
+    hl.dsp.exec_cmd('notify-send -u low -i dialog-information-symbolic "Test notification" "Here\'s a really long message to test truncation and wrapping\nYou can middle click or flick this notification to dismiss it!" -a "Shell" -A "Test1=I got it!" -A "Test2=Another action"'),
+    { locked = true }
+)

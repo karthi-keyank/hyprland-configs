@@ -350,3 +350,24 @@ hl.bind(
     hl.dsp.exec_cmd('notify-send -u low -i dialog-information-symbolic "Test notification" "Here\'s a really long message to test truncation and wrapping\nYou can middle click or flick this notification to dismiss it!" -a "Shell" -A "Test1=I got it!" -A "Test2=Another action"'),
     { locked = true }
 )
+
+
+-- here some new keybinds need to add
+
+
+
+-- Increase zoom
+hl.bind(
+    "SUPER + EQUAL",
+    hl.dsp.exec_cmd(
+        [[hyprctl -q keyword cursor:zoom_factor $(hyprctl getoption cursor:zoom_factor -j | jq '.float * 1.1')]]
+    )
+)
+
+-- Decrease zoom (never below 1.0)
+hl.bind(
+    "SUPER + MINUS",
+    hl.dsp.exec_cmd(
+        [[hyprctl -q keyword cursor:zoom_factor $(hyprctl getoption cursor:zoom_factor -j | jq '(.float * 0.9) | if . < 1 then 1 else . end')]]
+    )
+)

@@ -286,3 +286,24 @@ hl.bind( keybinds.kbEditor, hl.dsp.exec_cmd("app2unit -- " .. vars.editor))
 
 -- File manager
 hl.bind(keybinds.kbFileExplorer, hl.dsp.exec_cmd("app2unit -- " .. vars.fileExplorer))
+
+-- Full screen screenshot to clipboard
+hl.bind( keybinds.kbScreenshotFull, hl.dsp.exec_cmd("caelestia screenshot"), { locked = true })
+
+-- Capture region (with freeze)
+hl.bind( keybinds.kbScreenshotFreeze, hl.dsp.global("caelestia:screenshotFreeze"))
+
+-- Capture region (without freeze)
+hl.bind( keybinds.kbScreenshotRegion, hl.dsp.global("caelestia:screenshot"))
+
+-- Record screen with audio
+hl.bind( keybinds.kbScreenRecordAudio, hl.dsp.exec_cmd("caelestia record -s"))  -- RECORDING NOT WORKING PROPERLY
+
+-- Record screen without audio
+hl.bind( keybinds.kbScreenRecordNoAudio, hl.dsp.exec_cmd("caelestia record"))  -- RECORDING NOT WORKING PROPERLY
+
+-- Record specific region
+hl.bind( keybinds.kbScreenRecordRegion, hl.dsp.exec_cmd("caelestia record -r"))  -- RECORDING NOT WORKING PROPERLY
+
+-- Color picker
+hl.bind( keybinds.kbColorPicker, hl.dsp.exec_cmd("hyprpicker -a"))
